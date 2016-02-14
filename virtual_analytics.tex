@@ -49,6 +49,8 @@
 %% In preprint mode you may define your own headline.
 %\preprinttext{To appear in an IEEE VGTC sponsored conference.}
 
+\usepackage[export]{adjustbox}
+
 \usepackage{listings}
 \usepackage{color}
 
@@ -147,14 +149,14 @@ Whereas small and static scientific datasets can be quickly deciphered thanks to
 %% \section{Introduction} 
 
 
-With the increasing amount of scientific data that experts have to manipulate, the need for platforms able to handle the data flow complexity is strong. It is particularly true in structural biology where the simulation processes can now deal with very large and heterogeneous molecular structures. These structures can be composed of several millions of particles and consist of the molecule as well as its environment, adding to the complexity and the need to go beyond standard visualization solutions.
-The complexity of structural biology data force experts to move towards integrated systems where visualization and analysis can be merged. These integrated systems must be able to deal with heterogeneous data and to present them in the same working environment. The expert will then have the possibility to interact with his data in the most direct ways possible.
-Immersive environments address these requirements by providing both a better comprehension of the 3D structure of molecules, and new interaction techniques shortening the manipulation of the data by the experts.
+With the increasing amount of scientific data that experts have to manipulate, the need for platforms able to handle the large data flow complexity is strong. It is particularly true in structural biology where the simulation process can now deal with very large and heterogeneous molecular structures. These structures can be composed of several millions of particles and consist of many types of molecule including its environment. This overall complexity brings the need to go beyond standard visualization solutions.
+Structural biology experts tend to move towards integrated systems where visualization and analysis can be merged. These integrated systems must be able to deal with heterogeneous data and to present them in the same working environment.
+Immersive environments can play an important role for these integrated systems, providing both a better comprehension of the 3D structure of molecules, and new interaction techniques shortening the manipulation of the data by the experts.
 
 Some initiatives took advantage of recent development in Virtual Reality to enhance some structural biology tasks. visualization is the first and most obvious task that had taken advantage of new adaptive stereoscopic screens and immersive environments to plunged the experts at the really center of their molecules~\cite{van2000immersive,stone_immersive_2010,odonoghue_visualization_2010,hirst2014molecular}. Manipulation of structures during specific experiments of docking has also improved thanks to the using of haptic devices and audio feedbacks to drive a simulation~\cite{ferey_multisensory_2009}. Despite these studies, none specific developments have been made to setup an immersive platform where the expert could dispose of all its data and reason on them in order to submit new hypotheses.
 
 The main study process followed by the experts in structural biology still compartmentalizes the visualization of data and their analysis into two different and independent frameworks based on different tools.
-The explanation of this splitting is the significant differences between the data handled by the 3D visualization softwares and the analytical tools.
+This splitting can be explained by the significant differences between the data handled by the 3D visualization softwares and the analytical tools.
 On one side, 3D visualization solutions like PyMol~\cite{delano_pymol_2002}, VMD~\cite{humphrey_vmd:_1996}, YASARA~\cite{krieger2014yasara} or UnityMol~\cite{lv2013game} explore and manipulate 3D structures coordinates composing the molecular complex that will be displayed. The scene seen by the user will be composed of 3D objects reporting the overall shape of a particular molecule and its environment at a particular state. This scene can be static if we are interested in only one state of the molecule but it is often dynamic with a whole simulated trajectory of the molecule undergoing some energetic constraints coming from a physical simulation program.
 Analysis tools, on the other side, take into input raw number, on various format and from various sources depending on the pipeline in which they are used. Their outputs are graphical representation of trends or comparisons between elements parameters in a way that experts can quickly understand and use these information to guide their next hypotheses.
 During the process that tries to decipher a scientific mechanism, and as we highlighted previously, experts constantly move from visualization tools to analysis tools and vice versa, wasting a precious time along the way.
@@ -168,13 +170,11 @@ A major improvement of today available tools would bring into play a scenario wh
   \label{interactive_selection}
 \end{figure}
 
-Immersive environments favor the combination of components and provide several ways to merge 
-data and processes coming from different sources for a particular task. But this combination of heterogeneous information brings several issues that need to be tackled in order to propose a fully-functional immersive environments where scientists will have the possibility to visualise, analyse and interact with their data.
+Immersive environments favor the combination of components and provide several ways to merge data and processes coming from different sources for a particular task. But this combination of heterogeneous information brings several issues that need to be tackled in order to propose a fully-functional immersive environments where scientists will have the possibility to visualize, analyze and interact with their data.
 
-There is a need to link heterogeneous data around an homogeneous framework where each object or group of objects can be related to the parameters or properties that define it. These links will first allow the access of an object by its parameters but, conversely, it will also allow the access of parameters by the object itself. And beyond the access, an interaction of the user with the graphical representation of either the object in the 3D visualization space or the parameter in the analytical space will have an impact in both spaces as illustrated in the figure \ref{interactive_selection}.
+There is a need to link heterogeneous data around an homogeneous framework where each object or group of objects can be related to the parameters or properties that define it. These links will first allow the access of an object by its parameters but, conversely, it will also allow the access of parameters by the object itself. And beyond the access, an interaction of the user with the graphical representation of either the object in the 3D visualization space, or the parameter in the analytical space, will have an impact in the reciprocal space as illustrated in the figure \ref{interactive_selection}.
 
-We believe that the setup of a database with a high-level representation of all the data leads to an efficient way to mix visualization and analysis. By ordering knowledge, it is possible to create direct links between individuals and properties and then setup automatic retrievals of data each time an expert would need it.
-Another aspect to consider for an immersive platform combining visualization and analysis is the interaction between the experts and the ensemble of data that will be at his disposal.
+A database defined by a high-level representation of all the data leads to an efficient way to mix visualization and analysis. By classifying knowledge, it is possible to create direct links between individuals and properties and then setup automatic retrievals of data each time an expert would need it.
 
 The semantic definition of the application field can be enough to implement dynamic links between visual and analytical properties but do not allow for a specific way to interact with the data. As a result, we extended the definition of the structural biology content to the immersive context in which the platform will be used.
 By doing so, we are able to combine information from both the expert knowledge and the user context in order to define intelligent interactions during the immersive working session.
@@ -248,24 +248,25 @@ The \textit{subject} is the resource described, the \textit{predicate} represent
 \\
 (\textit{http://ontology.org/\#Pierre}, \textit{http://ontology.org/\#age}, \textit{xsd:int\^{}\^{}26})
 \\
-RDF has been quickly extended by a semantic layer in a model called RDF Schema (RDFS)~\cite{brickley2004rdf}. It defines classes, sub-classes, properties and sub-properties from which RDF resources will inherit. It permits the setup of relationships between high-level concepts and then extract relationships at the individual level. Included in the semantic layer, RDFS also provides the possibility to restrain the \textit{subjects} classes (\textit{rdfs:domain}) and \textit{objects} classes/datatypes (\textit{rdfs:range}) for a specific property used in RDF as a \textit{predicate}.
-For instance, the 2 following triples:
-\begin{lstlisting}[language=XML]
-<my:Protein>	<my:contains>	<my:Lysine> .
-<my:contains>	<rdfs:range>	<my:Amino-acid>
-\end{lstlisting}
-\noindent
-will indirectly imply the following statement:
-\begin{lstlisting}[language=XML]
-<my:Lysine>	<my:is-a>	<my:Amino-acid>
-\end{lstlisting}
-\noindent
+RDF has been quickly extended by a semantic layer in a model called RDF Schema (RDFS)~\cite{brickley2004rdf}. It defines classes, sub-classes, properties and sub-properties from which RDF resources will inherit. 
+% It permits the setup of relationships between high-level concepts and then extract relationships at the individual level. Included in the semantic layer, RDFS also provides the possibility to restrain the \textit{subjects} classes (\textit{rdfs:domain}) and \textit{objects} classes/datatypes (\textit{rdfs:range}) for a specific property used in RDF as a \textit{predicate}.
+% For instance, the 2 following triples:
+% \begin{lstlisting}[language=XML]
+% <my:Protein>	<my:contains>	<my:Lysine>
+% <my:contains>	<rdfs:range>	<my:Amino-acid>
+% \end{lstlisting}
+% \noindent
+% will indirectly imply the following statement:
+% \begin{lstlisting}[language=XML]
+% <my:Lysine>	<my:is-a>	<my:Amino-acid>
+% \end{lstlisting}
+% \noindent
 
 The semantic layer brought by RDFS can be complemented by another model named OWL. OWL is an computer standard, support of the Web Semantics ontologies and grammatically defines RDF data to ensure their coherency and setup a semantic framework. It is complementary to the RDFS even if it goes further in terms of reasoning possibilities and resources description. More expressive than RDFS, OWL adds specific relationships based on logical links between properties or classes. It is then possible to add symmetrical, transitivity, similarity or cardinality information on top of concepts relationships.
 Then, these triples:
 \begin{lstlisting}[language=XML]
-<my:is-composed-of>	<my:is-a>	<owl:TransitiveProperty> .
-<my:Protein>		<my:is-composed-of>	<my:Amino-acid> .
+<my:is-composed-of>	<my:is-a>	<owl:TransitiveProperty>
+<my:Protein>		<my:is-composed-of>	<my:Amino-acid>
 <my:Amino-acid>		<my:is-composed-of>	<my:Atom>
 \end{lstlisting}
 will indirectly imply the following statement:
@@ -273,36 +274,7 @@ will indirectly imply the following statement:
 <my:Protein>	<my:is-composed-of>	<my:Atom>
 \end{lstlisting}
 
-A crucial part of our immersive analytics platorm was to access the data defined by the ontology and stored as RDF triples. This access can be done efficiently via SPARQL, a query language and protocol used to access databases based on RDF triples. SPARQL allows not only to access data but also to edit, add or remove them. The access is done thanks to a specific endpoint provided as an URL and accessible by most of software libraries handling RDF data. SPARQL is closely related to SQL in its functioning, implementing the SELECT, FROM, WHERE keywords for instance to build a query. One of the difference with the SQL is the processing of queries. This is a 2-steps process where the first one is a research of matching patterns between the query and the database triples then a projection step where only the variables queries will be returned. Several operations are possible on the final results including SORT, JOIN, DISTINCT in order to filter or sort the results.
-As an example, the following query:
-
-\begin{lstlisting}[language=SPARQL]
-SELECT ?x ?id
-FROM <http://my_database.com> 
-WHERE {
-  ?y my:is-composed-of ?x .
-  ?y rdf:type my:Chain .
-  ?y my:chain_id "B" .
-  ?x my:res_id ?id
-}
-\end{lstlisting}
-\noindent
-will output:
-
-\begin{center}
- \begin{tabular}{|c | c|} 
- \hline
- ?x & ?id \\ [0.5ex] 
- \hline
- RES\_11 & 1 \\ 
- RES\_12 & 2 \\
- RES\_13 & 3 \\
- RES\_14 & 4 \\
- RES\_15 & 5 \\
- \hline
-\end{tabular}
-\end{center}
-\noindent
+A crucial part of our immersive analytics platorm was to access the data defined by the ontology and stored as RDF triples. This access can be done efficiently via SPARQL, a query language and protocol used to access databases based on RDF triples. SPARQL allows not only to access data but also to edit, add or remove them. The access is done thanks to a specific endpoint provided as an URL and accessible by most of software libraries handling RDF data. SPARQL is closely related to SQL in its functioning, implementing the SELECT, FROM, WHERE keywords for instance to build a query. One of the difference with the SQL is the processing of queries. This is a 2-steps process where the first one is a research of matching patterns between the query and the database triples then a projection step where only the variables queries will be returned. Several operations are possible on the final results including SORT, JOIN, DISTINCT in order to filter or sort the results. An example of a SPARQL query and its result can be found in supplementary material.
 
 \section{Architecture}
 
@@ -333,34 +305,7 @@ In addition to the biomolecular concepts and representations previously cited, w
 Once we setup this ontology, it was possible to feed the database by adding biological information gathered by the expert. These stored information will have to fit the vocabulary and classification defined by the rules present in the ontology.
 
 The description of a molecular system goes through the analysis of any biological information that can be described by a character chain or a value and that correspond to a concept or property identified in the ontology. Each information will be exhaustively gathered in the RDF database as triples. Within the scope of our study, we became interested in numerical molecular simulations. These simulations output at a regular time step a static snapshot of the molecular system. The energetic constraints of the simulation will make the system evolve towards specific states that experts try to decipher in order to understand some molecule mechanisms. The whole simulation created then a trajectory where each state, at a precise time, is associated to a snapshot. A snapshot is defined in our ontology by the \textit{Model} concept. A \textit{Model} gathers all the atoms coordinates of the molecular system at a defined time step. In order to distinguish the different components of a system, these components are identified by \textit{Chain}, another concept of our ontology. Then each \textit{Chain} in the system is composed of a sequence of \textit{Residues} that can be either \textit{Amino-acids} or \textit{Nucleotides} respectively standing for proteins and nucleic acids. The different inference rules present in the ontology allow us to not specify all the links between the different hierarchical component of a specific \textit{Model}. As a result, a \textit{Residue} that belongs to a specific \textit{Chain} will be automatically associated to the corresponding \textit{Model} where the \textit{Chain} appears.
-Some triples of our database are shown here:
-
-\begin{lstlisting}[language=XML]
-
-<owl:ObjectProperty rdf:about="&my;hasSize">
-    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
-    <rdfs:domain rdf:resource="&my;AminoAcid"/>
-    <rdfs:range rdf:resource="&my;Size"/>
-    <rdfs:subPropertyOf rdf:resource="&my;has_property"/>
-</owl:ObjectProperty>
-
-<owl:DatatypeProperty rdf:about="&my;chain_id">
-    <rdfs:range rdf:resource="&xsd;int"/>
-</owl:DatatypeProperty>
-
-<rdf:Description rdf:about="my:ATOM_36795">
-  <my:atom_id rdf:datatype="#int">125</my:atom_id>
-  <my:time_frame rdf:datatype="#int">190</my:time_frame>
-  <rdf:type rdf:resource="my:Atom"/>
-  <my:pos_z rdf:datatype="#double">22.33</my:pos_z>
-  <my:atom_type>CB</my:atom_type>
-  <my:pos_x rdf:datatype="#double">21.86</my:pos_x>
-  <my:uniq_id rdf:datatype="#int">36795</my:uniq_id>
-  <my:pos_y rdf:datatype="#double">31.6</my:pos_y>
-  <my:belongs_to rdf:resource="my:RES_3622"/>
-</rdf:Description>
-
-\end{lstlisting}
+Some triples of our database are shown in supplementary material.
 
 Every geometrical properties (position, angles, distance, etc.), physicochemical properties (solvant accessibility, partial charge, bonds, etc.) or analytical properties (energy, RMSD, temperature, etc.) are then integrated in the database and associated to individuals created from 3D structures (Model/Chain/Residue/Atom) for each step of the simulation. As a reminder, any individual are instance of concepts defined in the ontology. Individuals and their properties form then the population of the molecular database.
 
@@ -422,8 +367,8 @@ will output \textit{true} despite the absence of direct link between the two con
 
 \begin{figure}[!htb]
   \centering
-  {\includegraphics[width=\linewidth]{./figures/ch5/alanine_to_bio_component_owl}}
-    \caption[Extract from OWL ontology for the \textit{Alanine} concept.]{\it Extract from OWL ontology for the \textit{Alanine} concept.}
+  {\includegraphics[width=\linewidth]{./figures/alanine_to_bio_component_owl}}
+    \caption[Extract from OWL ontology for the \textit{Alanine} concept.]{\it Extract from our OWL ontology for the \textit{Alanine} concept.}
   \label{Fig:alanine_owl}
   % \hspace{0.3cm}
 \end{figure}
@@ -457,9 +402,49 @@ Once the different checking for the command coherency and validity have been don
 
 Our interpretation engine, able to translate a list of vocalized keywords into an application command is not the only possibility given by our semantic-based architecture. Any interaction of the user in either the visualization or analysis space with a structural group, a property or an analytic value is directly linked to an individual and its representations through the visualization or analytical filter. It is then possible to setup intelligent interactions in the immersive environment and synchronize any action of the expert between his two working spaces.
 
-TO illustrate the full-capacity of our platform, we setup a typical example of a molecular system study. This example takes place 
+\subsection{Test case}
+
+To illustrate the full-capacity of our platform, we chose a typical example of a molecular system study. This example setup a local visualization solution coupled to a distant web server where interactive graph can be created. Both spaces can be rendered in an immersive environment, either in the same screen space or split on one 3D screen for the visualization and a tablet for the web server. We assume, as it is the case in real studies, that the expert knows the molecular system and can interact vocally or by selecting elements in one of the space.
+
+\begin{figure}[!htb]
+  \centering
+  {\includegraphics[width=\linewidth,frame]{./figures/scenario_step_1_cropped}}
+    \caption[]{{\it On the right, selection of interesting models in the analytical space. The visualization state on the left is synchronized thanks to a SPARQL query in order to display the selected models.}}
+  \label{Fig:1st_step}
+  % \hspace{0.3cm}
+\end{figure}
+
+The first step of our scenario is a query triggered by the analytical space (web server) to get every numerical value that can be represented in a scatter plot. This will start the connection between the visualization space and the analytical space for the whole session. 
+Once the values are gathered, the expert will choose which structural component hierarchy he is interested in and what combinations of properties he wants to plot. Several queries will get the property values and the web server graphs library, D3.js\footnote{\url{https://d3js.org/}}, will plot the values. We chose here to focus on the model level and display a criteria of distance between a reference model and all the models of the studied traject
+
+The expert can select several models of importance, as shown in the first step of figure~\ref{Fig:1st_step}. The selection is synchronized over all the scatter plots previously created and will trigger a synchronous visualization of the individuals in the visual space (see second step of figure \ref{Fig:1st_step}).
+
+Expert can then pass to the visualization space and select some elements of the displayed structures he would like to focus on. These sub-elements of the current models will be sent to the analytical space that will ask the expert for the properties to be plotted. Once the choice is made, the selection will be highlighted in the analytical space as shown in the figure \ref{Fig:2nd_step} for a selection of 3 residues.
+
+\begin{figure}[!htb]
+  \centering
+  {\includegraphics[width=\linewidth,frame]{./figures/scenario_step_2_cropped}}
+    \caption[]{{\it On the left, selection of amino-acids of interest. The analytical space on the right is synchronized thanks to a SPARQL query and proposes adapted analyses to the expert.}}
+  \label{Fig:2nd_step}
+  % \hspace{0.3cm}
+\end{figure}
+
+The selection process can pass by a vocal command with our interpretation engine or by a manual selection. 
+New graphs can be added on runtime at any moment and are synchronized with the current ones. However, it is important to note that a full synchronization between the visualization and analytical spaces requires the same hierarchy of structural elements selected in the spaces. If a new selection is done at a \textit{Model} level, any graphs of lower hierarchy will be reset with the new selected models and the visualization will be reset with the new models at the same time.
+
+\subsection{Evaluation}
+
+The evaluation process started from the observation that the systematic evaluation of field-related tasks is rather complicated to setup because of: (1) usage and nature of the evaluated tools, in particular in molecular visualization, differ between experts. (2) implementation and adaptation of our developments over a representative sample of the tools is complex and very time-consuming. (3) Our approach is biased since based on the execution of expert tasks. (4) In order to apply standard statistic methods for evaluation, it is necessary to gather enough participants, the number of experts in our application field is rather limited.
+
+We then propose an evaluation method more theoretical than empirical, the HTA method (for "Hierarchical Task Analysis"). The HTA method consists in a division of a primary task into several sub-tasks. Each sub-task can be divided again until the sub-tasks reach a degree of precision sufficient to have their execution time evaluated accurately.
+
+This method is particularly useful to compare similar tasks performed under different conditions. It allows to evaluate both the task methodology with respect to specific conditions and the performance of the conditions for a specific task. It requires only one expert to evaluate the different sub-tasks execution time.
 
 \section{Conclusion}
+
+We have setup a semantic layer over an immersive environment dedicated to the interactive visualization and analysis of molecular simulations data. This setup was done through the implementation of an ontology describing both structural biology and interaction concepts manipulated by the experts during a study process.
+
+The platform success
 
 
 %% if specified like this the section will be ommitted in review mode
@@ -471,4 +456,66 @@ a grant from XYZ.}
 %%use following if all content of bibtex file should be shown
 %\nocite{*}
 \bibliography{virtual_analytics}
+
+\section{Supplementary material}
+
+\subsection{SPARQL query example}
+
+\begin{lstlisting}[language=SPARQL]
+SELECT ?x ?id
+FROM <http://my_database.com> 
+WHERE {
+  ?y my:is-composed-of ?x .
+  ?y rdf:type my:Chain .
+  ?y my:chain_id "B" .
+  ?x my:res_id ?id
+}
+\end{lstlisting}
+\noindent
+
+\begin{center}
+ \begin{tabular}{|c | c|} 
+ \hline
+ ?x & ?id \\ [0.5ex] 
+ \hline
+ RES\_11 & 1 \\ 
+ RES\_12 & 2 \\
+ RES\_13 & 3 \\
+ RES\_14 & 4 \\
+ RES\_15 & 5 \\
+ \hline
+\end{tabular}
+\end{center}
+\noindent
+
+\subsection{Database triples}
+
+\begin{lstlisting}[language=XML]
+
+<owl:ObjectProperty rdf:about="&my;hasSize">
+    <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    <rdfs:domain rdf:resource="&my;AminoAcid"/>
+    <rdfs:range rdf:resource="&my;Size"/>
+    <rdfs:subPropertyOf rdf:resource="&my;has_property"/>
+</owl:ObjectProperty>
+
+<owl:DatatypeProperty rdf:about="&my;chain_id">
+    <rdfs:range rdf:resource="&xsd;int"/>
+</owl:DatatypeProperty>
+
+<rdf:Description rdf:about="my:ATOM_36795">
+  <my:atom_id rdf:datatype="#int">125</my:atom_id>
+  <my:time_frame rdf:datatype="#int">190</my:time_frame>
+  <rdf:type rdf:resource="my:Atom"/>
+  <my:pos_z rdf:datatype="#double">22.33</my:pos_z>
+  <my:atom_type>CB</my:atom_type>
+  <my:pos_x rdf:datatype="#double">21.86</my:pos_x>
+  <my:uniq_id rdf:datatype="#int">36795</my:uniq_id>
+  <my:pos_y rdf:datatype="#double">31.6</my:pos_y>
+  <my:belongs_to rdf:resource="my:RES_3622"/>
+</rdf:Description>
+
+\end{lstlisting}
+
 \end{document}
+
