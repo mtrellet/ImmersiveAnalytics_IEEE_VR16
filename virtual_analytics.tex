@@ -119,7 +119,7 @@
 %% Abstract section.
 \abstract{
 Bringing together, in a unique immersive environment, visualization and analysis of scientific and complex data requires a thorough approach in order to fulfill scientists' specific expectations. Such an approach needs to consider the highly heterogeneous nature of data, the dynamic interactions between experts and data, and the large amount of data involved in scientific studies.
-Whereas small and static scientific datasets can quickly be deciphered thanks to standard immersive tools such as 3D visualization software packages, bigger and dynamic datasets exceed the analytical capacity of these tools, requiring an efficient platform for their manipulation. Through the example of the structural biology field we discuss the need for an approach based on a high-level definition of the content (scientific data) and the context (immersive environments and interfaces). Our design is illustrated by a platform for dynamic and intelligent representation of data to the user. This classification \mvb{((Which classification??))} will provide new ways to interact with the data via intelligent and direct links \mvb{((What type of links??))}. This approach is based on the semantic definition of all the concepts manipulated in the virtual environment, either abstract or concrete, which allows for an adaptive and interactive experience of both visualization and analysis.
+Whereas small and static scientific datasets can quickly be deciphered thanks to standard immersive tools such as 3D visualization software packages, bigger and dynamic datasets exceed the analytical capacity of these tools, requiring an efficient platform for their manipulation. Through the example of the structural biology field we discuss the need for an approach based on a high-level definition of the content (scientific data) and the context (immersive environments and interfaces). Our design is illustrated by a platform for dynamic and intelligent representation of data to the user. The data hierarchical classification will provide new ways to interact with the data via intelligent and direct relationships between them. This approach is based on the semantic definition of all the concepts manipulated in the virtual environment, either abstract or concrete, which allows for an adaptive and interactive experience of both visualization and analysis.
 } % end of abstract
 
 %% ACM Computing Classification System (CCS). 
@@ -169,7 +169,7 @@ A major improvement of tools available today would bring into play a scenario wh
 
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=\linewidth, frame]{figures/interactive_selection.pdf}
+  \includegraphics[width=\linewidth, frame]{figures/interactive_selection_def.pdf}
   \caption{3D visualization and analytical plot of a protein into two different spaces in the same environment. Any subset of points selected in the analytical space is instantaneously highlighted in the visualization space.}
   \label{interactive_selection}
 \end{figure}
@@ -189,7 +189,7 @@ By doing so, we were able to combine information from both the expert knowledge 
 
 In Computer Science, knowledge representation is often associated to the notion of ontology. An ontology is defined as a structured and hierarchical ensemble of concepts and relationships allowing to define a partial or a whole field. An ontology must be comprehensible by both  computer systems and humans. Indeed, an ontology often needs to be integrated into automatic processes setup by experts of a specific field, not always familiar with the computing side of the ontology.
 
-Ontologies must allow the classification of any specific value or information into a pre-defined scheme \mvb{((ou schematic, mais schema n'existe pas en anglais))} as instances of elements of this scheme. It plays the role of a set of grammatical rules for a language made of data.
+Ontologies must allow the classification of any specific value or information into a pre-defined scheme as instances of elements of this scheme. It plays the role of a set of grammatical rules for a language made of data.
 % For instance, a very simple ontology consisting of the two concepts "Atom" and "Charge" linked by a possessive relationship as illustrated in supplementary material.
 % If any atom is added to a database defined by this ontology, an instance of the concept "Atom" will be created and a value of charge will be added to the property "Charge". The atom and the value will be linked and it will be possible to access them by searching either for the instance or for the property.
 
@@ -236,7 +236,7 @@ Description logics & X & X & X & X & -  \\
 
 We chose to use the Semantic Web approach in order to setup our own ontology. 
 The Semantic Web has been created by the \textit{World Wide Web Consortium} under the lead of Tim Berners-Lee, with the aim to share semantic data on the web~\cite{berners2001semantic}. It is broadly used by the biggest web companies to uniformly store and share data. It belongs to the family of the Description logics that use the notions of \textit{concepts, roles} and \textit{individuals}. 
-The \textit{concepts} are represented by the sub-ensemble of elements in a specific universe, the \textit{roles} are the links between the elements and the \textit{individuals} are the elements of the universe~\cite{}\mvb{((previous citation missing))}. In our previous example, "Atom" and "Charge" would be \textit{concepts}, "has-a" a \textit{role} and the oxygen an \textit{individual}, as an instance of the \textit{concept} "Atom".
+The \textit{concepts} are represented by the sub-ensemble of elements in a specific universe, the \textit{roles} are the links between the elements and the \textit{individuals} are the elements of the universe. In our previous example, "Atom" and "Charge" would be \textit{concepts}, "has-a" a \textit{role} and the oxygen an \textit{individual}, as an instance of the \textit{concept} "Atom".
 % Each layer of the Semantic Webs (ontology, experimental data, querying process, etc.) have been associated to a language or a format. The different layers and their associated formats are described in the figure~\ref{web_semantic_hierarchy}. 
 
 \subsection{Semantic Web Layers}
@@ -244,10 +244,8 @@ The \textit{concepts} are represented by the sub-ensemble of elements in a speci
 The Resource Description Framework (RDF) is the basic model of Semantic Webs. It is a graph-based model aiming to describe in a formal way resources and their associated metadata. It is based on a knowledge representation from triples, a triple being the smallest knowledge division in RDF. Every data description is then an ensemble of triples including (\textit{subject}, \textit{predicate}, \textit{object})~\cite{godel1999bach}.
 
 The \textit{subject} is the resource described, the \textit{predicate} represents a property attached to the resource and the \textit{object} may represent a resource or a data (being a value of the attached property). Any resource is identified by an URI (Uniform Resource Identifier) whereas a data is anonymous since it can be duplicated (numerical value, string, etc.). An example of a triple could be:
-\\
-(\textit{http://ontology.org/\#Pierre}, \textit{http://ontology.org/\#age}, \textit{xsd:int\^{}\^{}26})
-\\
-\mvb{((Dans l'exemple precedent on ne comprend pas bien les ontology.org et xsd:int je trouve))}
+\centerline{(\textit{\#Pierre}, \textit{\#age}, \textit{26})}
+
 RDF has been quickly extended by a semantic layer in a model called RDF Schema (RDFS)~\cite{brickley2004rdf}. It defines classes, sub-classes, properties and sub-properties from which RDF resources will inherit. 
 
 % \begin{figure}[htb]
@@ -272,7 +270,7 @@ RDF has been quickly extended by a semantic layer in a model called RDF Schema (
 % \noindent
 
 The semantic layer provided by RDFS can be complemented by another model named OWL. OWL is a computer standard, supports Semantic Web ontologies, grammatically defines RDF data to ensure their coherency, and sets up a semantic framework. It is complementary to the RDFS even if it goes further in terms of reasoning possibilities and resource description. More expressive than RDFS, OWL adds specific relationships based on logical links between properties or classes. It is then possible to add symmetry, transitivity, similarity or cardinality information on top of concept relationships.
-Then \mvb{((THen?.. tu veux dire with OWL?))}, these triples:
+As a result, these triples:
 \begin{lstlisting}[language=XML]
 <my:is-composed-of>	<my:is-a>	<owl:TransitiveProperty>
 <my:Protein>		<my:is-composed-of>	<my:Amino-acid>
@@ -287,7 +285,7 @@ A crucial part of our immersive analytics platorm requirements was to be able to
 % The access is done thanks to a specific endpoint provided as an URL and accessible by most of software libraries handling RDF data. 
 SPARQL is closely related to SQL in its functioning, implementing the SELECT, FROM and WHERE keywords to build a query. 
 % One of the difference with the SQL is the processing of queries. This is a 2-steps process where the first one is a research of matching patterns between the query and the database triples then a projection step where only the variables queries will be returned. 
-Several operations are possible on the final results including SORT, JOIN, DISTINCT in order to filter or sort the results. Examples of SPARQL queries and their output is \mvb{Is or is not??} provided as supplementary material.
+Several operations are possible on the final results including SORT, JOIN, DISTINCT in order to filter or sort the results.
 
 \section{Architecture}
 
@@ -307,7 +305,7 @@ Our ontology has been designed around five categories, addressing five different
   \item \textbf{2D interactions} - Gather concepts related to the interactions in 2D environnements
 \end{itemize}
 
-The separation of the categories does not induce the absence of relationships between any two categories. For instance, "Atom" belongs to the \textbf{Biomolecular knowledge} category but is directly linked to the "Sphere" concept from \textbf{3D structure representation}. The whole network of connections will then permit to reason on the ontology in order to support the advanced interactivity level required in Visual Analytics \mvb{((premiere apparence du terme VA je crois.. est un peu bizarre ici))}.
+The separation of the categories does not induce the absence of relationships between any two categories. For instance, "Atom" belongs to the \textbf{Biomolecular knowledge} category but is directly linked to the "Sphere" concept from \textbf{3D structure representation}. The whole network of connections will then permit to reason on the ontology in order to support the advanced interactivity level required in our platform.
 
 Concepts and properties among the \textbf{3D structure representation} and \textbf{2D data representation} categories gather the graphical elements that allow for the representation of the \textbf{Biomolecular knowledge} category. Shape, colors but also graph types are notions defined in these two categories. 
 % It is worth noting that analytical concepts are defined by graphical or abstract elements that play a role in the creation and visualization of an analytical result. However, we voluntarily chose to not define the different calculations and analyses of molecular simulation data because of their high complexity and their heterogeneous nature between the specialized tools. This does not mean that they will not be used among the platform, it is only not relevant to include them in the ontology.
@@ -319,7 +317,6 @@ In addition to the biomolecular concepts and representations previously cited, w
 Once we set up our ontology, it was possible to feed the database by adding biological information gathered by the expert. The new information has to fit the vocabulary and classification defined by the rules present in the ontology in order to be adequately stored in the database.
 
 The description of a molecular system is constructed from the analysis of any biological information that can be described by a character chain or a value and that corresponds to a concept or property identified in the ontology. Each information will be exhaustively gathered in the RDF database as triples. Within the scope of our study, we focused on numerical molecular simulations. These simulations output time series of static snapshots of the molecular system at a regular time step. The Hamiltonian of the simulated model will drive the system towards specific states that experts try to decipher in order to understand underlying molecular mechanisms. The whole simulation creates a trajectory where each state, at a precise time, is associated to a snapshot. Our ontology defines a snapshot by the \textit{Model} concept. A \textit{Model} gathers all the atom coordinates of the molecular system at a defined time step. In order to distinguish the different components of a system, these components are identified by \textit{Chain}, another concept of our ontology. Each \textit{Chain} in the system is composed of a sequence of \textit{Residues} (also known as \textit{Amino-acids} in proteins). The different inference rules present in the ontology save us to specify all the links between the different hierarchical components of a specific \textit{Model} explicitly. As a result, a \textit{Residue} that belongs to a specific \textit{Chain} will be automatically associated to the corresponding \textit{Model} where the \textit{Chain} appears.
-Some triples of our database can \mvb{((Are, are not??))} be provided in supplementary material.
 
 Every geometrical property (position, angle, distance, etc.), physicochemical property (solvent accessibility, partial charge, bond, etc.) or analytical property (interaction energy, RMSD, temperature, etc.) is then integrated in the database and associated to individuals created from 3D structures (Model/Chain/Residue/Atom) for each step of the simulation. As a reminder, any individual is an instance of concepts defined in the ontology. Individuals and their properties form the population of the molecular database.
 
@@ -327,7 +324,7 @@ Every geometrical property (position, angle, distance, etc.), physicochemical pr
 
 Once all data has been integrated in the RDF database, it is necessary to setup an interrogation system able to retrieve the data for visualization and processing following interaction events in the working space. Our implementation of the query system mainly relies on the usage of SPARQL, as introduced before, and provides several ways to address the different needs of our platform. The richness and flexibility of SPARQL queries  allowed us to design a keyword to command interpretation engine that aims to transform a list of keywords into a comprehensive application command triggering an action in the working space.
 
-One of the most widely used interactive techniques in immersive environments is the vocal command. Based on a vocal recognition process, it consists in translating a sentence or a group of words said by the user into an application command. Vocal commands have the strong advantage that they can be associated with gestures to express complex multimodal commands. \mvb{((est-ce que c'etait bien le sens de la phrase initiale - que je n'avais pas comprise dans son etat?))}
+One of the most widely used interactive techniques in immersive environments is the vocal command. Based on a vocal recognition process, it consists in translating a sentence or a group of words said by the user into an application command. Vocal commands have the strong advantage that they can be associated with gestures to express complex multimodal commands.
 
 Most of the actions identified in our platform involve a structural group designated by the expert. These structural groups can be characterized by: identifiers having a biological meaning (residue ids are, by convention, numbered from one extremity of the chain to the other), unique identifiers in the RDF database, or via their properties.
 The interpretation of commands vocalized by the expert with natural language using a specific field-related vocabulary requires a representation carrying the complexity of the knowledge and linking the objects targeted by the user to the virtual objects involved in the interaction.
@@ -358,7 +355,9 @@ Each keyword recognized in the previous step is assigned to a category. This cla
   \item \textbf{Representation}
 \end{itemize}
 
-This classification is achieved through successive SPARQL queries to the ontology. \textit{Action}, \textit{Component}, \textit{Property} and \textit{Representation} categories have their own concepts and can be identified by a unique word ("Hide", "Chain", "Charged", "Sphere", etc.). At the opposite, the \textit{Identifier} category is linked to a concept instance from the \textit{Component} category. A biological identifier is very likely to be redundant because of the repetition of the molecular system at each time step. Therefore it is mandatory to associate a component with an identifier in the keywords to detect any identifier, and it is necessary that the associated component possesses the identifier in the database to validate the classification. \mvb{((j'ai un peu de mal avec la phrase precedente.. peux-tu etre plus clair/explicite?))}
+This classification is achieved through successive SPARQL queries to the ontology. \textit{Action}, \textit{Component}, \textit{Property} and \textit{Representation} categories have their own concepts and can be identified by a unique word ("Hide", "Chain", "Charged", "Sphere", etc.). At the opposite, the \textit{Identifier} category is linked to a concept instance from the \textit{Component} category. A biological identifier is very likely to be redundant because of the repetition of the molecular system at each time step. 
+% Therefore it is mandatory to associate a component with an identifier in the keywords to detect any identifier, and it is necessary that the associated component possesses the identifier in the database to validate the classification.
+Therefore it is mandatory to pair an identifier with a component in the keywords in order to validate its presence. Without component, any identifier is withdrwan from the list. If the identifier and the associated component exist in the database, the couple is validated.
 
 SPARQL commands use the \textit{ASK} operator to define whether a keyword belongs to a category or not. This operator takes one or several triples and returns a boolean that reflects whether the ensemble of triples is true or not with respect to the database. Some examples of queries can be found below:
 
@@ -391,23 +390,26 @@ Once each keyword is validated and associated to a category, e.g. identified as 
 
 \subsubsection{From vocal command to application command}
 
-In our platform, a vocal command is composed by a succession of syntactic groups linked between them to create an action query to the \mvb{immersive?} platform. It is possible to describe the type of command that was defined in the following manner:
+In our platform, a vocal command is composed by a succession of syntactic groups linked between them to create an action query to the immersive platform. It is possible to describe the type of command that was defined in the following manner:
 
 $$action\ [parameter]^+,\ (\ structural\_group\ [identifier]^+\ )^+$$
 
 Syntactic groups between $[]$ are optional, whereas others are mandatory. The $+$ indicates the possibility to have 0, 1 or several occurrences of the syntactic group. Finally, $()$ indicates a bloc of syntactic groups. This command architecture is present in our ontology under the form of pre-required concepts associated to the \textit{Action} concepts. For instance, the action concept \textit{Color} requires a property of \textit{Colors} type and a structural component to work with. These elements of information are then stored in the ontology, rendering them automatically checkable by the engine to detect whether all requirements are fulfilled for a specific action. This feature simpifies the definition of other actions in the ontology as the changes that have to be applied to the engine are minimal, typically either no or minor changes. The checking process will stay the same as long as the action is well-defined within the ontology.
 
-At the same level as for an action, a structural group is always mandatory to trigger a command. \mvb{Selon ta syntaxe, on pourrait avoir une action avec 0 groupes syntactiques, non??} The different ways to obtain a structural sub-ensemble are:
+At the same level as for an action, a structural group is always mandatory to trigger a command. The different ways to obtain a structural sub-ensemble are:
 
 \begin{enumerate}
   \item Component only: every individual that belongs to the concept will be taken into account
-  \item Combination of a component and an ensemble of identifiers: \mvb{description missing here??} 
+  \item Combination of a component and an ensemble of identifiers: coherency checking between component and identifiers 
   \item Property only: every individual that possesses the property will be taken into account
   \item Combination of a component and a property: coherency checking between component and property
 \end{enumerate}
 
-The structural group always refers to a group of individuals in order to disambiguate the results between the commands. This disambiguation implies that final commands are more complex.
-The hierarchical classification between structural components (Model/Chain/Residue/Atom) has a significant impact on the results of a given command. Indeed, the nature of structural components targeted by an action will be compared to the nature of the structural components currently studied. Depending on whether the command individual will be of a higher or lower hierarchical order, the command might trigger an action on a subpart of the displayed scene (for lower classified individuals) or \mvb{((probleme de raccord de cette 2e partie de phrase))} as a scene composition changer (for higher or equal classified individuals).
+The structural group always refers to a group of individuals in order to disambiguate the results between the commands. 
+This disambiguation implies that final commands are more complex.
+The hierarchical classification between structural components (Model/Chain/Residue/Atom) has a significant impact on the results of a given command. 
+Indeed, the nature of structural components targeted by an action will be compared to the nature of the structural components currently studied. 
+Depending on whether the command individual will be of a higher or lower hierarchical order, the command might trigger an action either on a subpart of the displayed scene (for lower classified individuals) or as a scene composition changer (for higher or equal classified individuals).
 For instance, if only two models are studied when a vocal command is transmitted, putative amino-acids individually targeted by an action will be the ones that belong to the two displayed models. If the individuals targeted by the command action would have been models, different from the displayed ones, an update of the displayed molecular complexes would have occurred first.
 
 Once the different checks for the command coherency and validity have been carried out, the command is sent to both spaces (visualization and analysis) in order to synchronize the visual results.
